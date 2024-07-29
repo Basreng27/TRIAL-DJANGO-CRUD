@@ -1,0 +1,18 @@
+{% extends "../template/template.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for d in data %}
+            <li>{{ d.name }} 
+                <form method="post" action="{% url 'genre_delete' d.id %}">
+                    {% csrf_token %}
+                    <a href="{% url 'genre_update' d.id %}" class="btn btn-secondary">Update</a>
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

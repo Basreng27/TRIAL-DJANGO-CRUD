@@ -1,0 +1,224 @@
+=> Library/Perintah
+    => pip
+        => Instal/Update pip
+            python -m pip install --upgrade pip
+        => Cek Versi 
+            pip --version
+    => python
+        => Cek Versi 
+            python --version
+    => Virtual Environment
+        => Instal
+            pip install virtualenv
+        => Membuat
+            python -m venv venv
+        => Aktifkan
+            venv\Scripts\activate
+    => Requirement
+        => Membuat
+            pip freeze > requirements.txt
+    => Django (Framework)
+        => Install
+            pip install Django
+        => Install Untuk SQL Server
+            pip install django-mssql-backend
+        => Install Untuk SQL Server Alternative
+            pip install mssql-django
+        => Cek Versi
+            django-admin --version
+        => Membuat
+            django-admin startproject <namaProject>
+        => Membuat App nya
+            python manage.py startapp <namaApp>
+        => Uninstall
+            pip uninstall django
+        => Migrate Database
+            python manage.py migrate
+        => Membuat Migrasi (Jika Ada Datanya Di models.py (Kemudian Jalankan Lagi Atas))
+            python manage.py makemigrations
+    => pyodbc (Untuk Koneksi SQL Server)
+        => Instal
+            pip install pyodbc
+        => Pilihan Ke-2
+           pip install django-pyodbc-azure 
+    => pytz
+        => Install
+            pip install pytz
+
+
+=> Install Django
+    => Cek python dan pip
+        python --version
+        pip --version
+    => Install Virtual Environtment
+        pip install virtualenv
+    => Buat Dan Aktivkan Virtual Environment
+        python -m venv myenv
+        myenv\Scripts\activate
+    => Install Django
+        pip install django
+    => Cek Versi Django
+        django-admin --version
+    => Buat Project Django
+        django-admin startproject <myproject>
+    => Masuk Kedalam Folder
+        cd <myproject>
+    => Run Server Django
+        python manage.py runserver
+
+=> Struktur Direktori Proyek Django
+    => Setelah Anda membuat proyek Django baru menggunakan django-admin startproject myproject, Anda akan mendapatkan struktur direktori seperti ini:
+    myproject/
+        manage.py
+        myproject/
+            __init__.py
+            settings.py
+            urls.py
+            wsgi.py
+
+    Penjelasan Setiap File dan Direktori
+    1. manage.py
+        Skrip utama untuk mengelola proyek Django Anda. Ini adalah titik masuk untuk berbagai perintah administrasi proyek, seperti menjalankan server pengembangan, migrasi database, dan sebagainya.
+    myproject/ (direktori utama proyek)
+
+    2. init.py
+        File kosong yang menandakan bahwa direktori ini adalah modul Python.
+    
+    3. settings.py
+        Berisi semua konfigurasi pengaturan proyek Anda, seperti pengaturan database, aplikasi yang terinstal, pengaturan middleware, dan lainnya.
+    
+    4. urls.py
+        File ini berisi deklarasi URL untuk proyek Anda. Ini menentukan bagaimana URL yang diterima akan dipetakan ke tampilan yang sesuai.
+    
+    5. wsgi.py
+        Berfungsi sebagai titik masuk untuk server WSGI yang digunakan untuk menjalankan proyek Django Anda di server produksi.
+    
+    => Menambahkan Aplikasi ke Proyek Django
+    Setelah membuat proyek, Anda biasanya akan membuat aplikasi Django. Misalnya, dengan perintah:
+        python manage.py startapp myapp
+    
+    Ini akan menambahkan struktur direktori baru untuk aplikasi Anda:
+    myapp/
+        __init__.py
+        admin.py
+        apps.py
+        models.py
+        tests.py
+        views.py
+        migrations/
+            __init__.py
+
+    Penjelasan Setiap File dan Direktori dalam Aplikasi
+    1. init.py
+        File kosong yang menandakan bahwa direktori ini adalah modul Python.
+    
+    2. admin.py
+        Berisi definisi konfigurasi untuk tampilan admin Django, di mana Anda bisa mendaftarkan model untuk dikelola melalui antarmuka admin.
+    
+    3. apps.py
+        Berisi konfigurasi aplikasi, dengan nama kelas konfigurasi aplikasi.
+    
+    4. models.py
+        Tempat Anda mendefinisikan model data aplikasi Anda. Model adalah representasi dari tabel database.
+    
+    5. tests.py
+        Tempat Anda menulis tes untuk aplikasi Anda, yang digunakan untuk memastikan bahwa aplikasi Anda bekerja seperti yang diharapkan.
+    
+    6. views.py
+        Tempat Anda menulis logika tampilan untuk aplikasi Anda. Tampilan mengontrol apa yang dilihat pengguna berdasarkan permintaan mereka.
+    
+    7. migrations/ (direktori)
+        Berisi file migrasi database yang diciptakan oleh Django setiap kali Anda membuat atau mengubah model. File-file ini digunakan untuk mengubah skema database agar sesuai dengan model yang Anda definisikan.
+    
+    => Menambahkan URL dan Template
+    1. urls.py
+        Anda dapat membuat file urls.py di direktori aplikasi Anda untuk menentukan URL spesifik aplikasi tersebut.
+            from django.urls import path
+            from . import views
+
+            urlpatterns = [
+                path('', views.home, name='home'),
+            ]
+
+    2. templates/ (direktori)
+        Anda dapat membuat direktori templates di dalam direktori aplikasi Anda untuk menyimpan template HTML. Anda juga perlu mengatur DIRS di settings.py agar Django dapat menemukan template Anda.
+    
+    Contoh Struktur Proyek yang Lebih Lengkap
+    myproject/
+        manage.py
+        myproject/
+            __init__.py
+            settings.py
+            urls.py
+            wsgi.py
+        myapp/
+            __init__.py
+            admin.py
+            apps.py
+            models.py
+            tests.py
+            views.py
+            urls.py
+            migrations/
+                __init__.py
+            templates/
+                myapp/
+                    home.html
+    
+    => Menambahkan Aplikasi ke Pengaturan
+    Jangan lupa untuk menambahkan aplikasi baru Anda ke daftar INSTALLED_APPS di settings.py proyek Anda:
+        INSTALLED_APPS = [
+            ...
+            'myapp',
+        ]
+
+=> Akses Ke firstapp
+    => Tambahkan File Url Di firstapp
+        from django.urls import path
+        from . import views
+
+        urlpatterns = [
+            path('', views.test, name='test'),
+            path('test2', views.test_two, name='test2')
+        ]
+    => Tambahkan Code Untuk Memanggil Url Di firstapp ke learnDjango
+        from django.contrib import admin
+        from django.urls import path, include
+        from django.http import HttpResponse
+
+        def home_view(request):
+            return HttpResponse("Selamat datang di halaman utama!")
+
+        urlpatterns = [
+            path('admin/', admin.site.urls),
+            path('test/', include('firstapp.urls')),
+            path('', home_view)
+        ]
+    => Tambahkan View Di firstapp
+        from django.shortcuts import render
+        from django.http import HttpResponse
+
+        # Create your views here.
+        def test(request):
+            return HttpResponse("Ini adalah halaman test!")
+
+        def test_two(request):
+            return HttpResponse("Ini Test Ke 2")
+    => Untuk Akses 
+        http://127.0.0.1:8000/test/test2
+
+=> Membuat View
+    => Buat Template Di Folder templastes
+        base.html
+        home.html
+    => Buat Url di learnDjango Yang Mengarah Ke View
+        from firstapp import views
+        path('', views.home, name='home')
+    => Buat Function Yang Mengarahkan home Di firstapp/views.py
+        def home(request):
+            return render(request, 'home.html')
+    => Tambahkan Setting di learnDjango/settings.py Pada TEMPLATES Untuk Mengarahkan Secara Default
+        import os
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+
+=> Koneksi Ke database
