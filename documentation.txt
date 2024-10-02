@@ -44,7 +44,8 @@
     => pytz
         => Install
             pip install pytz
-
+    => For Image 
+        python -m pip install Pillow
 
 => Install Django
     => Cek python dan pip
@@ -68,89 +69,36 @@
 
 => Struktur Direktori Proyek Django
     => Setelah Anda membuat proyek Django baru menggunakan django-admin startproject myproject, Anda akan mendapatkan struktur direktori seperti ini:
-    myproject/
-        manage.py
         myproject/
-            __init__.py
-            settings.py
-            urls.py
-            wsgi.py
+            manage.py
+            myproject/
+                __init__.py
+                settings.py
+                urls.py
+                wsgi.py
 
-    Penjelasan Setiap File dan Direktori
-    1. manage.py
-        Skrip utama untuk mengelola proyek Django Anda. Ini adalah titik masuk untuk berbagai perintah administrasi proyek, seperti menjalankan server pengembangan, migrasi database, dan sebagainya.
-    myproject/ (direktori utama proyek)
+        Penjelasan Setiap File dan Direktori
+        1. manage.py
+            Skrip utama untuk mengelola proyek Django Anda. Ini adalah titik masuk untuk berbagai perintah administrasi proyek, seperti menjalankan server pengembangan, migrasi database, dan sebagainya.
+        myproject/ (direktori utama proyek)
 
-    2. init.py
-        File kosong yang menandakan bahwa direktori ini adalah modul Python.
-    
-    3. settings.py
-        Berisi semua konfigurasi pengaturan proyek Anda, seperti pengaturan database, aplikasi yang terinstal, pengaturan middleware, dan lainnya.
-    
-    4. urls.py
-        File ini berisi deklarasi URL untuk proyek Anda. Ini menentukan bagaimana URL yang diterima akan dipetakan ke tampilan yang sesuai.
-    
-    5. wsgi.py
-        Berfungsi sebagai titik masuk untuk server WSGI yang digunakan untuk menjalankan proyek Django Anda di server produksi.
-    
+        2. init.py
+            File kosong yang menandakan bahwa direktori ini adalah modul Python.
+        
+        3. settings.py
+            Berisi semua konfigurasi pengaturan proyek Anda, seperti pengaturan database, aplikasi yang terinstal, pengaturan middleware, dan lainnya.
+        
+        4. urls.py
+            File ini berisi deklarasi URL untuk proyek Anda. Ini menentukan bagaimana URL yang diterima akan dipetakan ke tampilan yang sesuai.
+        
+        5. wsgi.py
+            Berfungsi sebagai titik masuk untuk server WSGI yang digunakan untuk menjalankan proyek Django Anda di server produksi.
+        
     => Menambahkan Aplikasi ke Proyek Django
-    Setelah membuat proyek, Anda biasanya akan membuat aplikasi Django. Misalnya, dengan perintah:
-        python manage.py startapp myapp
-    
-    Ini akan menambahkan struktur direktori baru untuk aplikasi Anda:
-    myapp/
-        __init__.py
-        admin.py
-        apps.py
-        models.py
-        tests.py
-        views.py
-        migrations/
-            __init__.py
-
-    Penjelasan Setiap File dan Direktori dalam Aplikasi
-    1. init.py
-        File kosong yang menandakan bahwa direktori ini adalah modul Python.
-    
-    2. admin.py
-        Berisi definisi konfigurasi untuk tampilan admin Django, di mana Anda bisa mendaftarkan model untuk dikelola melalui antarmuka admin.
-    
-    3. apps.py
-        Berisi konfigurasi aplikasi, dengan nama kelas konfigurasi aplikasi.
-    
-    4. models.py
-        Tempat Anda mendefinisikan model data aplikasi Anda. Model adalah representasi dari tabel database.
-    
-    5. tests.py
-        Tempat Anda menulis tes untuk aplikasi Anda, yang digunakan untuk memastikan bahwa aplikasi Anda bekerja seperti yang diharapkan.
-    
-    6. views.py
-        Tempat Anda menulis logika tampilan untuk aplikasi Anda. Tampilan mengontrol apa yang dilihat pengguna berdasarkan permintaan mereka.
-    
-    7. migrations/ (direktori)
-        Berisi file migrasi database yang diciptakan oleh Django setiap kali Anda membuat atau mengubah model. File-file ini digunakan untuk mengubah skema database agar sesuai dengan model yang Anda definisikan.
-    
-    => Menambahkan URL dan Template
-    1. urls.py
-        Anda dapat membuat file urls.py di direktori aplikasi Anda untuk menentukan URL spesifik aplikasi tersebut.
-            from django.urls import path
-            from . import views
-
-            urlpatterns = [
-                path('', views.home, name='home'),
-            ]
-
-    2. templates/ (direktori)
-        Anda dapat membuat direktori templates di dalam direktori aplikasi Anda untuk menyimpan template HTML. Anda juga perlu mengatur DIRS di settings.py agar Django dapat menemukan template Anda.
-    
-    Contoh Struktur Proyek yang Lebih Lengkap
-    myproject/
-        manage.py
-        myproject/
-            __init__.py
-            settings.py
-            urls.py
-            wsgi.py
+        Setelah membuat proyek, Anda biasanya akan membuat aplikasi Django. Misalnya, dengan perintah:
+            python manage.py startapp myapp
+        
+        Ini akan menambahkan struktur direktori baru untuk aplikasi Anda:
         myapp/
             __init__.py
             admin.py
@@ -158,19 +106,72 @@
             models.py
             tests.py
             views.py
-            urls.py
             migrations/
                 __init__.py
-            templates/
-                myapp/
-                    home.html
+
+        Penjelasan Setiap File dan Direktori dalam Aplikasi
+        1. init.py
+            File kosong yang menandakan bahwa direktori ini adalah modul Python.
+        
+        2. admin.py
+            Berisi definisi konfigurasi untuk tampilan admin Django, di mana Anda bisa mendaftarkan model untuk dikelola melalui antarmuka admin.
+        
+        3. apps.py
+            Berisi konfigurasi aplikasi, dengan nama kelas konfigurasi aplikasi.
+        
+        4. models.py
+            Tempat Anda mendefinisikan model data aplikasi Anda. Model adalah representasi dari tabel database.
+        
+        5. tests.py
+            Tempat Anda menulis tes untuk aplikasi Anda, yang digunakan untuk memastikan bahwa aplikasi Anda bekerja seperti yang diharapkan.
+        
+        6. views.py
+            Tempat Anda menulis logika tampilan untuk aplikasi Anda. Tampilan mengontrol apa yang dilihat pengguna berdasarkan permintaan mereka.
+        
+        7. migrations/ (direktori)
+            Berisi file migrasi database yang diciptakan oleh Django setiap kali Anda membuat atau mengubah model. File-file ini digunakan untuk mengubah skema database agar sesuai dengan model yang Anda definisikan.
+    
+    => Menambahkan URL dan Template
+        1. urls.py
+            Anda dapat membuat file urls.py di direktori aplikasi Anda untuk menentukan URL spesifik aplikasi tersebut.
+                from django.urls import path
+                from . import views
+
+                urlpatterns = [
+                    path('', views.home, name='home'),
+                ]
+
+        2. templates/ (direktori)
+            Anda dapat membuat direktori templates di dalam direktori aplikasi Anda untuk menyimpan template HTML. Anda juga perlu mengatur DIRS di settings.py agar Django dapat menemukan template Anda.
+        
+        Contoh Struktur Proyek yang Lebih Lengkap
+        myproject/
+            manage.py
+            myproject/
+                __init__.py
+                settings.py
+                urls.py
+                wsgi.py
+            myapp/
+                __init__.py
+                admin.py
+                apps.py
+                models.py
+                tests.py
+                views.py
+                urls.py
+                migrations/
+                    __init__.py
+                templates/
+                    myapp/
+                        home.html
     
     => Menambahkan Aplikasi ke Pengaturan
-    Jangan lupa untuk menambahkan aplikasi baru Anda ke daftar INSTALLED_APPS di settings.py proyek Anda:
-        INSTALLED_APPS = [
-            ...
-            'myapp',
-        ]
+        Jangan lupa untuk menambahkan aplikasi baru Anda ke daftar INSTALLED_APPS di settings.py proyek Anda:
+            INSTALLED_APPS = [
+                ...
+                'myapp',
+            ]
 
 => Akses Ke firstapp
     => Tambahkan File Url Di firstapp
